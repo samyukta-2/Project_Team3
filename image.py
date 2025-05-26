@@ -304,3 +304,32 @@ def main():
         if args.roc:
             detector.plot_roc_curve(args.train)
 
+def predict(self, image_path):
+    
+    if not os.path.exists(image_path):
+        raise FileNotFoundError(f"Image not found at {image_path}")
+
+    try:
+        img = cv2.imread(image_path)
+        if img is None:
+            raise ValueError("Invalid image format")
+
+        if img.shape[2] != 3:
+            raise ValueError("Image must have 3 color channels")
+
+        features = np.hstack([
+            extract_lbp_features(img),
+            extract_color_histogram(img),
+            extract_edge_histogram(img),
+            extract_ela_features(img)
+        ])
+        return self.classifier.predict([features])[0]
+
+    except Exception as e:
+        raise RuntimeError(f"Prediction failed: {str(e)}")
+
+ImageForgeryDetector.predict = predict
+
+
+
+
