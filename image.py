@@ -106,4 +106,5 @@ return images, labels
 
 class ImageForgeryDetector:
     def __init__(self):
+        self.classifier = RandomForestClassifier(n_estimators=100, random_state=42)
 
