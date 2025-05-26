@@ -112,3 +112,6 @@ class ImageForgeryDetector:
         features = []
         extended_labels = []
 
+
+        for img, label in zip(images, labels):
+
