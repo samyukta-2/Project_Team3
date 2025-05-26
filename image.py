@@ -153,3 +153,5 @@ cm = confusion_matrix(y_true, y_pred)
         plt.ylabel('True')
         plt.title('Confusion Matrix')
         plt.show()
+
+        def cross_validate(self, folder, cv=5):
