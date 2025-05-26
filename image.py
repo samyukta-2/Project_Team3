@@ -39,3 +39,6 @@ augmented_images = [
         cv2.flip(image, 1),
         cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE),
         cv2.rotate(image, cv2.ROTATE_180),
+        cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    ]
+    return augmented_images
