@@ -29,3 +29,5 @@ def extract_lbp_features(image, radius=3, n_points=24):
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     lbp = local_binary_pattern(gray, n_points, radius, method='uniform')
     hist, _ = np.histogram(lbp.ravel(), bins=np.arange(0, n_points + 3), range=(0, n_points + 2))
+    hist = hist.astype('float')
+    hist /= (hist.sum() + 1e-7)
