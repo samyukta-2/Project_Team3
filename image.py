@@ -16,3 +16,4 @@ def load_images_from_folder(folder):
     labels = []
     for label in os.listdir(folder):
         label_folder = os.path.join(folder, label)
+         if os.path.isdir(label_folder):
