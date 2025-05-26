@@ -160,3 +160,4 @@ cm = confusion_matrix(y_true, y_pred)
         print(f'Cross-validation scores: {scores}')
         print(f'Mean accuracy: {scores.mean():.2f}')
 
+def save_model(self, path='forgery_detector.pkl'):
