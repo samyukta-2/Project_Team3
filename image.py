@@ -127,4 +127,5 @@ class ImageForgeryDetector:
 
             for aug_img in augment_image(img):
                 aug_feat = np.hstack([
+                    extract_lbp_features(aug_img),
 
