@@ -108,4 +108,5 @@ class ImageForgeryDetector:
     def __init__(self):
         self.classifier = RandomForestClassifier(n_estimators=100, random_state=42)
     def prepare_dataset(self, folder):
+        images, labels = load_images_from_folder(folder)
 
