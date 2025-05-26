@@ -131,3 +131,6 @@ class ImageForgeryDetector:
 extract_color_histogram(aug_img),
                     extract_edge_histogram(aug_img)
                 ])
+                features.append(aug_feat)
+                extended_labels.append(label)
+
