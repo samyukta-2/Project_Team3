@@ -33,3 +33,6 @@ def extract_lbp_features(image, radius=3, n_points=24):
     hist /= (hist.sum() + 1e-7)
         return hist
 
+
+def augment_image(image):
+
