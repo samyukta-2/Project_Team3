@@ -212,3 +212,11 @@ def augment_image(image):
     
     augmented.append(cv2.flip(image, 1))
     augmented.append(cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE))
+
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    hsv[..., 2] = hsv[..., 2] * 0.8  
+    augmented.append(cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR))
+
+    gauss = np.random.normal(0, 0.1*255, image.shape).astype('uint8')
+    augmented.append(cv2.add(image, gauss))
+
