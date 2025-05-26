@@ -146,3 +146,6 @@ img = cv2.imread(image_path)
 def plot_confusion_matrix(self, y_true, y_pred):
 cm = confusion_matrix(y_true, y_pred)
         plt.figure(figsize=(8, 6))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                  xticklabels=['Forged', 'Real'],
+                  yticklabels=['Forged', 'Real'])
