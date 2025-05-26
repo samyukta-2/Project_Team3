@@ -195,3 +195,6 @@ def calculate_ela(image, quality=95):
     temp_path = "temp.jpg"
     cv2.imwrite(temp_path, image, [cv2.IMWRITE_JPEG_QUALITY, quality])
     temp_image = cv2.imread(temp_path)
+    os.remove(temp_path)
+    ela = cv2.absdiff(image, temp_image)
+    return ela.flatten()
