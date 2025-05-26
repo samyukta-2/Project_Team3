@@ -135,3 +135,7 @@ extract_color_histogram(aug_img),
                 extended_labels.append(label)
         return np.array(features), np.array(extended_labels)
 
+
+
+    def train(self, folder):
+
