@@ -132,4 +132,7 @@ return images, labels
 
 
     def predict(self, image_path):
-
+img = cv2.imread(image_path)
+        if img is None:
+            raise FileNotFoundError(f"Image not found at {image_path}")
+            
