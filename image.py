@@ -172,3 +172,12 @@ def load_model(self, path='forgery_detector.pkl'):
             parser = argparse.ArgumentParser(description='Image Forgery Detector')
     parser.add_argument('--train', metavar='DATASET_DIR', help='Train using dataset directory')
     parser.add_argument('--test', metavar='IMAGE_PATH', help='Test single image')
+     parser.add_argument('--model', default='model.pkl', help='Model file path')
+    parser.add_argument('--cross-validate', type=int, help='Run cross-validation with K folds')
+    args = parser.parse_args()
+
+    detector = ImageForgeryDetector()
+
+    if args.train:
+        detector.train(args.train)
+        detector.save_model(args.model)
