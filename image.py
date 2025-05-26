@@ -126,4 +126,5 @@ class ImageForgeryDetector:
 
 
             for aug_img in augment_image(img):
+                aug_feat = np.hstack([
 
