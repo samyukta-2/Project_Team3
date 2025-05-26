@@ -228,8 +228,18 @@ def augment_image(image):
 
     return augmented
 
-# New feature importance visualization method
+
 def plot_feature_importance(self, feature_names=None):
-    """Visualize feature importance from Random Forest model"""
+    
     importances = self.classifier.feature_importances_
     indices = np.argsort(importances)[::-1]
+    plt.figure(figsize=(12, 6))
+    plt.title("Feature Importances")
+    plt.bar(range(20), importances[indices[:20]], align='center')
+    plt.xticks(range(20), indices[:20])
+    plt.xlabel('Feature Index')
+    plt.ylabel('Relative Importance')
+    plt.show()
+
+ImageForgeryDetector.plot_feature_importance = plot_feature_importance
+
