@@ -6,3 +6,4 @@ import joblib
 import argparse
 import matplotlib.pyplot as plt
 from skimage.feature import local_binary_pattern
+from sklearn.ensemble import RandomForestClassifier
