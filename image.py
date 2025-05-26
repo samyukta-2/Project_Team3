@@ -165,3 +165,5 @@ def save_model(self, path='forgery_detector.pkl'):
         print(f'Model saved to {path}')
 
 def load_model(self, path='forgery_detector.pkl'):
+     self.classifier = joblib.load(path)
+        print(f'Model loaded from {path}')
