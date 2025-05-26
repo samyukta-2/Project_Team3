@@ -142,3 +142,6 @@ img = cv2.imread(image_path)
         ])
         return self.classifier.predict([features])[0]
 
+
+def plot_confusion_matrix(self, y_true, y_pred):
+
