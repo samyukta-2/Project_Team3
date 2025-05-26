@@ -133,4 +133,5 @@ extract_color_histogram(aug_img),
                 ])
                 features.append(aug_feat)
                 extended_labels.append(label)
+        return np.array(features), np.array(extended_labels)
 
