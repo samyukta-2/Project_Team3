@@ -135,4 +135,5 @@ return images, labels
 img = cv2.imread(image_path)
         if img is None:
             raise FileNotFoundError(f"Image not found at {image_path}")
-            
+            features = np.hstack([
+            extract_lbp_features(img), 
