@@ -263,3 +263,18 @@ def tune_hyperparameters(self, folder, param_grid=None):
     print(f"Best cross-validation score: {grid_search.best_score_:.2f}")
 
 ImageForgeryDetector.tune_hyperparameters = tune_hyperparameters
+
+def plot_roc_curve(self, folder):
+    
+    from sklearn.metrics import RocCurveDisplay
+
+    X, y = self.prepare_dataset(folder)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+    self.classifier.fit(X_train, y_train)
+
+    RocCurveDisplay.from_estimator(self.classifier, X_test, y_test)
+    plt.title('ROC Curve')
+    plt.show()
+
+ImageForgeryDetector.plot_roc_curve = plot_roc_curve
+
