@@ -37,3 +37,5 @@ def extract_lbp_features(image, radius=3, n_points=24):
 def augment_image(image):
 augmented_images = [
         cv2.flip(image, 1),
+        cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE),
+        cv2.rotate(image, cv2.ROTATE_180),
