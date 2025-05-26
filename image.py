@@ -105,4 +105,5 @@ return images, labels
 
 
 class ImageForgeryDetector:
+    def __init__(self):
 
