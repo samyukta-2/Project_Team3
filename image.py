@@ -110,4 +110,5 @@ class ImageForgeryDetector:
     def prepare_dataset(self, folder):
         images, labels = load_images_from_folder(folder)
         features = []
+        extended_labels = []
 
