@@ -167,3 +167,8 @@ def save_model(self, path='forgery_detector.pkl'):
 def load_model(self, path='forgery_detector.pkl'):
      self.classifier = joblib.load(path)
         print(f'Model loaded from {path}')
+
+        def main():
+            parser = argparse.ArgumentParser(description='Image Forgery Detector')
+    parser.add_argument('--train', metavar='DATASET_DIR', help='Train using dataset directory')
+    parser.add_argument('--test', metavar='IMAGE_PATH', help='Test single image')
