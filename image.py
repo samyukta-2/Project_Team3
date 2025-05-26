@@ -149,3 +149,7 @@ cm = confusion_matrix(y_true, y_pred)
         sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
                   xticklabels=['Forged', 'Real'],
                   yticklabels=['Forged', 'Real'])
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.title('Confusion Matrix')
+        plt.show()
