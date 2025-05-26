@@ -204,3 +204,11 @@ def extract_ela_features(image):
     hist, _ = np.histogram(ela_image, bins=256, range=(0, 256))
     hist = hist.astype('float') / (hist.sum() + 1e-7)
     return hist
+
+def augment_image(image):
+    
+    augmented = [image]
+
+    
+    augmented.append(cv2.flip(image, 1))
+    augmented.append(cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE))
