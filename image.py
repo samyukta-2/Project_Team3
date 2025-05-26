@@ -243,3 +243,23 @@ def plot_feature_importance(self, feature_names=None):
 
 ImageForgeryDetector.plot_feature_importance = plot_feature_importance
 
+def tune_hyperparameters(self, folder, param_grid=None):
+    
+    from sklearn.model_selection import GridSearchCV
+
+    if param_grid is None:
+        param_grid = {
+            'n_estimators': [50, 100, 200],
+            'max_depth': [None, 10, 20],
+            'min_samples_split': [2, 5, 10]
+        }
+
+    X, y = self.prepare_dataset(folder)
+    grid_search = GridSearchCV(self.classifier, param_grid, cv=3, n_jobs=-1)
+    grid_search.fit(X, y)
+
+    self.classifier = grid_search.best_estimator_
+    print(f"Best parameters: {grid_search.best_params_}")
+    print(f"Best cross-validation score: {grid_search.best_score_:.2f}")
+
+ImageForgeryDetector.tune_hyperparameters = tune_hyperparameters
