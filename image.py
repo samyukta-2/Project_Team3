@@ -181,3 +181,12 @@ def load_model(self, path='forgery_detector.pkl'):
     if args.train:
         detector.train(args.train)
         detector.save_model(args.model)
+        elif args.test:
+        detector.load_model(args.model)
+        result = detector.predict(args.test)
+        print(f"Prediction for {args.test}: {'Forged' if result == 'forged' else 'Authentic'}")
+    elif args.cross_validate:
+        detector.cross_validate(args.train, cv=args.cross_validate)
+
+if __name__ == '__main__':
+    main()
