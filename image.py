@@ -118,4 +118,5 @@ class ImageForgeryDetector:
                 extract_lbp_features(img),
                 extract_color_histogram(img),
                 extract_edge_histogram(img)
-
+ ])
+            features.append(combined_feat)
