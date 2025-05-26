@@ -278,3 +278,29 @@ def plot_roc_curve(self, folder):
 
 ImageForgeryDetector.plot_roc_curve = plot_roc_curve
 
+
+def main():
+    parser = argparse.ArgumentParser(description='Image Forgery Detector')
+    parser.add_argument('--train', metavar='DATASET_DIR', help='Train using dataset directory')
+    parser.add_argument('--test', metavar='IMAGE_PATH', help='Test single image')
+    parser.add_argument('--model', default='model.pkl', help='Model file path')
+    parser.add_argument('--cross-validate', type=int, help='Run cross-validation with K folds')
+    parser.add_argument('--tune', action='store_true', help='Perform hyperparameter tuning')
+    parser.add_argument('--features', action='store_true', help='Show feature importance plot')
+    parser.add_argument('--roc', action='store_true', help='Generate ROC curve')
+    args = parser.parse_args()
+
+    detector = ImageForgeryDetector()
+
+    if args.train:
+        if args.tune:
+            detector.tune_hyperparameters(args.train)
+        else:
+            detector.train(args.train)
+        detector.save_model(args.model)
+
+        if args.features:
+            detector.plot_feature_importance()
+        if args.roc:
+            detector.plot_roc_curve(args.train)
+
