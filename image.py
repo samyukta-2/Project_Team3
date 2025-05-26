@@ -19,3 +19,4 @@ def load_images_from_folder(folder):
          if os.path.isdir(label_folder):
              for filename in glob.glob(os.path.join(label_folder, '*.jpg')):
                  img = cv2.imread(filename, cv2.IMREAD_COLOR)
+                 if img is not None:
