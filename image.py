@@ -93,34 +93,40 @@ return images, labels
 
 
 
+class ImageForgeryDetector:
+    def __init__(self):
+        self.classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+    def prepare_dataset(self, folder):
+        images, labels = load_images_from_folder(folder)
+        features = []
+        extended_labels = []
+
+
+        for img, label in zip(images, labels):
+            combined_feat = np.hstack([
+                extract_lbp_features(img),
+                extract_color_histogram(img),
+                extract_edge_histogram(img)
+ ])
+            features.append(combined_feat)
+                        extended_labels.append(label)
+
+            for aug_img in augment_image(img):
+                aug_feat = np.hstack([
+                    extract_lbp_features(aug_img),
+extract_color_histogram(aug_img),
+                    extract_edge_histogram(aug_img)
+                ])
+                features.append(aug_feat)
+                extended_labels.append(label)
+        return np.array(features), np.array(extended_labels)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    def train(self, folder):
+   X, y = self.prepare_dataset(folder)
+        X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.3, random_state=42)
+        self.classifier.fit(X_train, y_train
 
 
 
@@ -351,3 +357,11 @@ augmented_images = [
         cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
     ]
     return augmented_images
+
+         y_pred = self.classifier.predict(X_test)
+         print(f'Accuracy: {accuracy_score(y_test, y_pred):.2f}')
+        print(classification_report(y_test, y_pred))
+        self.plot_confusion_matrix(y_test, y_pred)
+
+
+
