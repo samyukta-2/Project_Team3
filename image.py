@@ -149,4 +149,6 @@ extract_color_histogram(aug_img),
 
 
          y_pred = self.classifier.predict(X_test)
+         print(f'Accuracy: {accuracy_score(y_test, y_pred):.2f}')
+        print(
 
