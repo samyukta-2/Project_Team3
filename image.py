@@ -12,3 +12,4 @@ from sklearn.metrics import classification_report, accuracy_score, confusion_mat
 import seaborn as sns
 
 def load_images_from_folder(folder):
+    images = []
