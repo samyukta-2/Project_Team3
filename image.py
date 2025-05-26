@@ -333,3 +333,21 @@ ImageForgeryDetector.predict = predict
 
 
 
+
+def extract_lbp_features(image, radius=3, n_points=24):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    lbp = local_binary_pattern(gray, n_points, radius, method='uniform')
+    hist, _ = np.histogram(lbp.ravel(), bins=np.arange(0, n_points + 3), range=(0, n_points + 2))
+    hist = hist.astype('float')
+    hist /= (hist.sum() + 1e-7)
+        return hist
+
+
+def augment_image(image):
+augmented_images = [
+        cv2.flip(image, 1),
+        cv2.rotate(image, cv2.ROTATE_90_CLOCKWISE),
+        cv2.rotate(image, cv2.ROTATE_180),
+        cv2.rotate(image, cv2.ROTATE_90_COUNTERCLOCKWISE)
+    ]
+    return augmented_images
