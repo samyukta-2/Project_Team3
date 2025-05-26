@@ -122,3 +122,8 @@ class ImageForgeryDetector:
             features.append(combined_feat)
                         extended_labels.append(label)
 
+
+
+
+            for aug_img in augment_image(img):
+
