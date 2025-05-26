@@ -14,3 +14,4 @@ import seaborn as sns
 def load_images_from_folder(folder):
     images = []
     labels = []
+    for label in os.listdir(folder):
