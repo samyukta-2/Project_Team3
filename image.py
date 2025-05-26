@@ -23,3 +23,6 @@ def load_images_from_folder(folder):
                      images.append(img)
                      labels.append(label)
 return images, labels
+
+
+def extract_lbp_features(image, radius=3, n_points=24):
