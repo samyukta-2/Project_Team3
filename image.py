@@ -120,3 +120,5 @@ class ImageForgeryDetector:
                 extract_edge_histogram(img)
  ])
             features.append(combined_feat)
+                        extended_labels.append(label)
+
