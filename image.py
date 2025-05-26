@@ -198,3 +198,9 @@ def calculate_ela(image, quality=95):
     os.remove(temp_path)
     ela = cv2.absdiff(image, temp_image)
     return ela.flatten()
+
+def extract_ela_features(image):
+    ela_image = calculate_ela(image)
+    hist, _ = np.histogram(ela_image, bins=256, range=(0, 256))
+    hist = hist.astype('float') / (hist.sum() + 1e-7)
+    return hist
