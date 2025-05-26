@@ -140,3 +140,5 @@ img = cv2.imread(image_path)
             extract_color_histogram(img),
             extract_edge_histogram(img)
         ])
+        return self.classifier.predict([features])[0]
+
