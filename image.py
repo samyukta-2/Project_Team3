@@ -138,4 +138,5 @@ extract_color_histogram(aug_img),
 
 
     def train(self, folder):
-
+   X, y = self.prepare_dataset(folder)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, 
