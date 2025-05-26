@@ -26,3 +26,5 @@ return images, labels
 
 
 def extract_lbp_features(image, radius=3, n_points=24):
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    lbp = local_binary_pattern(gray, n_points, radius, method='uniform')
