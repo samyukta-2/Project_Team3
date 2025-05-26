@@ -192,3 +192,6 @@ return images, labels
 
 
 def calculate_ela(image, quality=95):
+    temp_path = "temp.jpg"
+    cv2.imwrite(temp_path, image, [cv2.IMWRITE_JPEG_QUALITY, quality])
+    temp_image = cv2.imread(temp_path)
