@@ -140,4 +140,13 @@ extract_color_histogram(aug_img),
     def train(self, folder):
    X, y = self.prepare_dataset(folder)
         X_train, X_test, y_train, y_test = train_test_split(X, y,test_size=0.3, random_state=42)
-        self.classifier.fit(X_train, y_train) 
+        self.classifier.fit(X_train, y_train)
+
+
+
+
+
+
+
+         y_pred = self.classifier.predict(X_test)
+
