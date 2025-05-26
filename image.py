@@ -197,6 +197,10 @@ extract_color_histogram(aug_img),
 
 
 
+
+
+
+
 def calculate_ela(image, quality=95):
     temp_path = "temp.jpg"
     cv2.imwrite(temp_path, image, [cv2.IMWRITE_JPEG_QUALITY, quality])
@@ -294,11 +298,57 @@ def main():
     parser.add_argument('--tune', action='store_true', help='Perform hyperparameter tuning')
     parser.add_argument('--features', action='store_true', help='Show feature importance plot')
     parser.add_argument('--roc', action='store_true', help='Generate ROC curve')
+
+    def predict(self, image_path):
+img = cv2.imread(image_path)
+        if img is None:
+            raise FileNotFoundError(f"Image not found at {image_path}")
+            features = np.hstack([
+            extract_lbp_features(img),
+            extract_color_histogram(img),
+            extract_edge_histogram(img)
+        ])
+        return self.classifier.predict([features])[0]
+
+
+def plot_confusion_matrix(self, y_true, y_pred):
+cm = confusion_matrix(y_true, y_pred)
+        plt.figure(figsize=(8, 6))
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
+                  xticklabels=['Forged', 'Real'],
+                  yticklabels=['Forged', 'Real'])
+        plt.xlabel('Predicted')
+        plt.ylabel('True')
+        plt.title('Confusion Matrix')
+        plt.show()
+
+        def cross_validate(self, folder, cv=5):
+             X, y = self.prepare_dataset(folder)
+        scores = cross_val_score(self.classifier, X, y, cv=cv)
+        print(f'Cross-validation scores: {scores}')
+        print(f'Mean accuracy: {scores.mean():.2f}')
+
+def save_model(self, path='forgery_detector.pkl'):
+            joblib.dump(self.classifier, path)
+        print(f'Model saved to {path}')
+
+def load_model(self, path='forgery_detector.pkl'):
+     self.classifier = joblib.load(path)
+        print(f'Model loaded from {path}')
+
+        def main():
+            parser = argparse.ArgumentParser(description='Image Forgery Detector')
+    parser.add_argument('--train', metavar='DATASET_DIR', help='Train using dataset directory')
+    parser.add_argument('--test', metavar='IMAGE_PATH', help='Test single image')
+     parser.add_argument('--model', default='model.pkl', help='Model file path')
+    parser.add_argument('--cross-validate', type=int, help='Run cross-validation with K folds')
+
     args = parser.parse_args()
 
     detector = ImageForgeryDetector()
 
     if args.train:
+
         if args.tune:
             detector.tune_hyperparameters(args.train)
         else:
@@ -364,4 +414,17 @@ augmented_images = [
         self.plot_confusion_matrix(y_test, y_pred)
 
 
+
+
+        detector.train(args.train)
+        detector.save_model(args.model)
+        elif args.test:
+        detector.load_model(args.model)
+        result = detector.predict(args.test)
+        print(f"Prediction for {args.test}: {'Forged' if result == 'forged' else 'Authentic'}")
+    elif args.cross_validate:
+        detector.cross_validate(args.train, cv=args.cross_validate)
+
+if __name__ == '__main__':
+    main()
 
