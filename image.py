@@ -220,3 +220,16 @@ def augment_image(image):
     gauss = np.random.normal(0, 0.1*255, image.shape).astype('uint8')
     augmented.append(cv2.add(image, gauss))
 
+ rows, cols = image.shape[:2]
+    pts1 = np.float32([[50,50], [200,50], [50,200]])
+    pts2 = np.float32([[10,100], [200,50], [100,250]])
+    M = cv2.getAffineTransform(pts1, pts2)
+    augmented.append(cv2.warpAffine(image, M, (cols, rows)))
+
+    return augmented
+
+# New feature importance visualization method
+def plot_feature_importance(self, feature_names=None):
+    """Visualize feature importance from Random Forest model"""
+    importances = self.classifier.feature_importances_
+    indices = np.argsort(importances)[::-1]
