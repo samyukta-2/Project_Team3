@@ -116,4 +116,5 @@ class ImageForgeryDetector:
         for img, label in zip(images, labels):
             combined_feat = np.hstack([
                 extract_lbp_features(img),
+                extract_color_histogram(img),
 
